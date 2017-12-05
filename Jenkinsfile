@@ -44,25 +44,25 @@ pipeline {
       }
     }
 
-    stages('test infra'){
+    stage('test infra'){
       steps {
         bat 'echo todo'
       }
     }
 
-    stages('plan provisioning'){
+    stage('plan provisioning'){
       steps {
         bat 'echo todo'
       }
     }
 
-    stages('apply provisioning'){
+    stage('apply provisioning'){
       steps {
         bat 'echo todo'
       }
     }
 
-    stages('test provisioning'){
+    stage('test provisioning'){
       steps {
         bat 'echo todo'
       }

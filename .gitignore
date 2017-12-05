@@ -4,6 +4,7 @@
 *.tfstate.backup
 terraform.tfvars
 .terraform/
+.terraform*
 
 # Other files
 *.pptx
