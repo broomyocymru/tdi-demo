@@ -57,7 +57,9 @@ pipeline {
     stage('test infra'){
       agent { label 'tf' }
       steps {
-        sh 'echo todo'
+      withCredentials([file(credentialsId:'inspec-secrets', variable: 'secrets')]){
+        sh 'AZURE_CREDS_FILE=$secrets inspec exec test/demo-profile'
+      }
       }
     }
 
