@@ -58,7 +58,7 @@ pipeline {
       agent { label 'tf' }
       steps {
       withCredentials([file(credentialsId:'inspec-secrets', variable: 'secrets')]){
-        sh 'AZURE_CREDS_FILE=$secrets inspec exec test/demo-profile'
+        sh 'AZURE_CREDS_FILE=$secrets inspec exec tests/demo-profile'
       }
       }
     }
