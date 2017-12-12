@@ -14,7 +14,7 @@ pipeline {
     stage('validate & plan infra') {
       agent { label 'tf'}
       steps {
-          withCredentials([file(credentialsId:'terraform-live', variable: 'secrets')]){
+          withCredentials([file(credentialsId:'terraform-secrets', variable: 'secrets')]){
             sh 'terraform init -upgrade=true infrastructure'
             sh 'terraform get -update infrastructure'
             sh 'terraform validate -var-file=%secrets% infrastructure'
