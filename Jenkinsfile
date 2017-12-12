@@ -2,10 +2,12 @@ pipeline {
   agent none
 
   stages{
+    agent { label 'tf'}
     stage('tools check'){
       steps{
-          bat 'git --version'
-          bat 'terraform --version'
+          sh 'git --version'
+          sh 'terraform --version'
+
       }
     }
 
@@ -13,16 +15,16 @@ pipeline {
       agent { label 'tf'}
       steps {
           withCredentials([file(credentialsId:'terraform-live', variable: 'secrets')]){
-            bat 'terraform init -upgrade=true infrastructure'
-            bat 'terraform get -update infrastructure'
-            bat 'terraform validate -var-file=%secrets% infrastructure'
-            bat '''
+            sh 'terraform init -upgrade=true infrastructure'
+            sh 'terraform get -update infrastructure'
+            sh 'terraform validate -var-file=%secrets% infrastructure'
+            sh '''
               terraform plan -detailed-exitcode -out="plan.out" -var-file="%secrets%" infrastructure
               set status=%errorLevel%
               echo "%status%" > status
               if "%status%" equ "1" (echo "Plan Failed" & EXIT /b 1)
             '''
-            bat 'echo "%status%"'
+            sh 'echo "%status%"'
 
             stash name: "plan", includes: "plan.out"
             stash name: "status", includes: "status"
@@ -40,34 +42,16 @@ pipeline {
         timeout(time: 24, unit:'HOURS'){
           input 'Do you want to apply changes?'
         }
-        bat 'terraform apply plan.out'
+        sh 'terraform apply plan.out'
       }
     }
 
     stage('test infra'){
+      agent { label 'tf' }
       steps {
-        bat 'echo todo'
+        sh 'echo todo'
       }
     }
-
-    stage('plan provisioning'){
-      steps {
-        bat 'echo todo'
-      }
-    }
-
-    stage('apply provisioning'){
-      steps {
-        bat 'echo todo'
-      }
-    }
-
-    stage('test provisioning'){
-      steps {
-        bat 'echo todo'
-      }
-    }
-
 
   }
 }

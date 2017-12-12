@@ -8,6 +8,7 @@ resource "azurerm_resource_group" "demo-rg" {
   }
 }
 
+/*
 resource "azurerm_resource_group" "euro-rg" {
   name = "euro-rg"
   location = "North Europe"
@@ -16,12 +17,4 @@ resource "azurerm_resource_group" "euro-rg" {
     env = "${var.tag-env}"
   }
 }
-
-resource "azurerm_resource_group" "invalid-rg" {
-  name = "invalid_rg-Convention"
-  location = "${var.location}"
-
-  tags {
-    env = "${var.tag-env}"
-  }
-}
+*/

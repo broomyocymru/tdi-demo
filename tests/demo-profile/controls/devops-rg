@@ -1,0 +1,22 @@
+
+control 'DevOps Resource Group' do
+  impact 0.1
+  title 'DevOps Resource Group'
+
+  describe azure_generic_resource(group_name: 'devops-rg') do
+     its('total') { should eq 8 }
+     its('Microsoft.Compute/virtualMachines') { should eq 1 }
+     its('Microsoft.Network/networkInterfaces') { should eq 1 }
+     its('Microsoft.Network/publicIPAddresses') { should eq 1 }
+     its('Microsoft.Network/networkSecurityGroups') { should eq 1 }
+     its('Microsoft.Storage/storageAccounts') { should eq 0 }
+     its('Microsoft.Network/virtualNetworks') { should eq 1 }
+     its('Microsoft.Compute/disks') { should eq 1 }
+  end
+
+  describe azure_generic_resource(group_name: 'devops-rg', name: 'demo-vnet') do
+    its('location') { should cmp 'ukwest' }
+    its('properties.addressSpace.addressPrefixes') { should include '10.0.0.0/20'}
+  end
+ 
+end

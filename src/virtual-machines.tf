@@ -1,6 +1,8 @@
+
+
 module "vm1" {
   source = "./std-vm"
-  name = "vm-1"
+  name = "demo-01-vm"
   resource_group_name = "${azurerm_resource_group.demo-rg.name}"
   location = "${var.location}"
   tag-env = "${var.tag-env}"

@@ -1,0 +1,8 @@
+---
+lockfile_version: 1
+depends:
+- name: inspec-azure
+  resolved_source:
+    url: https://github.com/chef/inspec-azure/archive/russellseymour/all-resources.zip
+    sha256: eb2281fde11489ce42b54e801fae7b1cca1c890c7b43a03d3940988f28eee11e
+  version_constraints: "[]"
