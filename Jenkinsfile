@@ -7,7 +7,7 @@ pipeline {
       steps{
           sh 'git --version'
           sh 'terraform --version'
-
+          sh 'inspec --version'
       }
     }
 
@@ -25,7 +25,7 @@ pipeline {
               set -e
 
               echo $status > status
-              
+
               if [ $? -eq 1 ]
               then
                 echo "Terraform Plan Failed"
