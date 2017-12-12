@@ -19,7 +19,7 @@ pipeline {
             sh 'terraform get -update infrastructure'
             sh 'terraform validate -var-file=$secrets infrastructure'
             sh '''
-              terraform plan -detailed-exitcode -out="plan.out" -var-file="$secrets" infrastructure
+              terraform plan -detailed-exitcode -out="plan.out" -var-file="$secrets" infrastructure || true
               status=$?
               echo "$status" > status
 
