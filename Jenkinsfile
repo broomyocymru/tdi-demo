@@ -17,14 +17,20 @@ pipeline {
           withCredentials([file(credentialsId:'terraform-secrets', variable: 'secrets')]){
             sh 'terraform init -upgrade=true infrastructure'
             sh 'terraform get -update infrastructure'
-            sh 'terraform validate -var-file=%secrets% infrastructure'
+            sh 'terraform validate -var-file=$secrets infrastructure'
             sh '''
-              terraform plan -detailed-exitcode -out="plan.out" -var-file="%secrets%" infrastructure
-              set status=%errorLevel%
-              echo "%status%" > status
-              if "%status%" equ "1" (echo "Plan Failed" & EXIT /b 1)
+              terraform plan -detailed-exitcode -out="plan.out" -var-file="$secrets" infrastructure
+              status=$?
+              echo "$status" > status
+
+              if [ $? -eq 1 ]
+              then
+                echo "Terraform Plan Failed"
+                exit 1
+              fi
+
             '''
-            sh 'echo "%status%"'
+            sh 'echo "$status"'
 
             stash name: "plan", includes: "plan.out"
             stash name: "status", includes: "status"
