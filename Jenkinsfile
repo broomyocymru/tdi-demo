@@ -2,8 +2,8 @@ pipeline {
   agent none
 
   stages{
-    agent { label 'tf'}
     stage('tools check'){
+      agent { label 'tf'}
       steps{
           sh 'git --version'
           sh 'terraform --version'
