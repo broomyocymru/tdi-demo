@@ -19,10 +19,13 @@ pipeline {
             sh 'terraform get -update infrastructure'
             sh 'terraform validate -var-file=$secrets infrastructure'
             sh '''
-              terraform plan -detailed-exitcode -out="plan.out" -var-file="$secrets" infrastructure || true
+              set +e
+              terraform plan -detailed-exitcode -out="plan.out" -var-file="$secrets" infrastructure
               status=$?
-              echo "$status" > status
+              set -e
 
+              echo $status > status
+              
               if [ $? -eq 1 ]
               then
                 echo "Terraform Plan Failed"
@@ -30,7 +33,6 @@ pipeline {
               fi
 
             '''
-            sh 'echo "$status"'
 
             stash name: "plan", includes: "plan.out"
             stash name: "status", includes: "status"
