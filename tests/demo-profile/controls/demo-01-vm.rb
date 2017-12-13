@@ -8,8 +8,8 @@ title 'demo-01-vm'
 #   vm = begin azure_virtual_machine(name: 'demo-01-vm', resource_group: 'demo-rg') rescue nil end
 #
 #   describe vm do
-#     its('sku') { should eq '2016-Datacenter' }
-#     its('publisher') { should ieq 'MicrosoftWindowsServer' }
-#     its('offer') { should ieq 'WindowsServer' }
+#      its('properties.storageProfile.imageReference.publisher') { should cmp 'MicrosoftWindowsServer' }
+#      its('properties.storageProfile.imageReference.offer') { should cmp 'WindowsServer' }
+#      its('properties.storageProfile.imageReference.sku') { should cmp '2016-Datacenter' }
 #   end
 # end
