@@ -20,7 +20,7 @@ control 'Subscription Tests' do
 
   describe azure_generic_resource(group_name: 'demo-rg', name: 'demo-vnet') do
     its('location') { should cmp 'ukwest' }
-    its('properties.addressSpace.addressPrefixes') { should include '10.0.0.0/20'}
+    its('properties.addressSpace.addressPrefixes') { should include '11.0.0.0/20'}
   end
 
 end
