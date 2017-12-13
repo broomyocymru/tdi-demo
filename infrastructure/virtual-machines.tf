@@ -1,5 +1,3 @@
-
-
 module "vm1" {
   source = "./std-vm"
   name = "demo-01-vm"

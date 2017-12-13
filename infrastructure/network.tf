@@ -48,6 +48,18 @@ resource "azurerm_network_security_group" "app-nsg" {
     destination_address_prefix = "*"
   }
 
+  security_rule {
+    name                       = "winrm"
+    priority                   = 102
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "5985-5986"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
   tags {
     env = "${var.tag-env}"
   }

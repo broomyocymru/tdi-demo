@@ -55,17 +55,28 @@ pipeline {
     }
 
     stage('test infra'){
+      agent { label 'tf' }
+      steps {
+        withCredentials([file(credentialsId:'inspec-secrets', variable: 'secrets')]){
+          sh 'AZURE_CREDS_FILE=$secrets inspec exec tests/demo-profile'
+        }
+      }
+    }
+
+/* Removed docker as its failing!
+    stage('test infra'){
       agent {
           docker {
             image 'chef/inspec:latest'
           }
       }
       steps {
-      withCredentials([file(credentialsId:'inspec-secrets', variable: 'secrets')]){
-        sh 'AZURE_CREDS_FILE=$secrets inspec exec tests/demo-profile'
-      }
+        withCredentials([file(credentialsId:'inspec-secrets', variable: 'secrets')]){
+          sh 'AZURE_CREDS_FILE=$secrets inspec exec tests/demo-profile'
+        }
       }
     }
+*/
 
   }
 }

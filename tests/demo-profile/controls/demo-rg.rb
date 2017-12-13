@@ -5,7 +5,7 @@ control 'Subscription Tests' do
 
   describe azure_generic_resource(group_name: 'demo-rg') do
      its('total') { should eq 2 }
-     its('Microsoft.Compute/virtualMachines') { should eq 2 }
+     #its('Microsoft.Compute/virtualMachines') { should eq 1 }
      #its('Microsoft.Network/networkInterfaces') { should eq 1 }
      #its('Microsoft.Network/publicIPAddresses') { should eq 1 }
      #its('Microsoft.Network/networkSecurityGroups') { should eq 1 }
