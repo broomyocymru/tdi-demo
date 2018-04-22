@@ -61,7 +61,7 @@ pipeline {
             agent { label 'tf' }
             steps {
               withCredentials([file(credentialsId:'inspec-secrets', variable: 'secrets')]){
-                sh 'AZURE_CREDS_FILE=$secrets inspec exec infra-tests/demo-profile --reporter html:report.html junit:junit.xml
+                sh 'AZURE_CREDS_FILE=$secrets inspec exec infra-tests/demo-profile --reporter html:report.html junit:junit.xml'
               }
             }
 
