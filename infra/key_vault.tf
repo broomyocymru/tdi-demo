@@ -10,6 +10,7 @@ resource "azurerm_key_vault" "demo-vault" {
   location = "${var.location}"
   resource_group_name = "${azurerm_resource_group.demo-rg.name}"
   tenant_id = "${data.azurerm_client_config.current.tenant_id}"
+  enabled_for_deployment = true
 
   sku {
     name = "standard"

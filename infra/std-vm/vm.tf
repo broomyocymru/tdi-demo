@@ -3,7 +3,6 @@ resource "azurerm_virtual_machine" "vm" {
   location = "${var.location}"
   resource_group_name = "${var.resource_group_name}"
   network_interface_ids = ["${azurerm_network_interface.private_nic.id}"]
-
   vm_size = "${var.vm_size}"
 
   delete_os_disk_on_termination = true
