@@ -5,7 +5,4 @@ copyright: The Authors
 copyright_email: you@example.com
 license: All Rights Reserved
 summary: An InSpec Compliance Profile
-version: 0.1.1
-depends:
-  - name: inspec-azure
-    url: https://github.com/chef/inspec-azure/archive/master.zip
+version: 0.1.2
