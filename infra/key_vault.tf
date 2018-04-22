@@ -55,8 +55,6 @@ resource "azurerm_key_vault" "demo-vault" {
       "delete",
       "get",
       "list",
-      "purge",
-      "recover",
       "restore",
       "set"
     ]
