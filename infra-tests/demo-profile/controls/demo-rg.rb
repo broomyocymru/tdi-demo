@@ -3,7 +3,7 @@ control 'Subscription Tests' do
   impact 1.0
   title 'Demo Resource Groups'
 
-  describe azure_generic_resource(group_name: 'demo-rg') do
+  describe azure_resource_group(name: 'demo-rg') do
      its('total') { should eq 7 }
      its('Microsoft.Compute/virtualMachines') { should eq 1 }
      its('Microsoft.Network/networkInterfaces') { should eq 1 }
