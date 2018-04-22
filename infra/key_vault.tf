@@ -25,8 +25,6 @@ resource "azurerm_key_vault" "demo-vault" {
       "listissuers",
       "managecontacts",
       "manageissuers",
-      "purge",
-      "recover",
       "setissuers",
       "update"
     ]
