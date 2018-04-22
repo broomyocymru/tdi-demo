@@ -1,5 +1,5 @@
 resource "azurerm_key_vault_certificate" "vm-cert" {
-  name      = "${var.prefix}-cert"
+  name      = "${var.name}-cert"
   vault_uri = "${var.vault_uri}"
   certificate_policy {
     issuer_parameters {
