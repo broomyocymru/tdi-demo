@@ -56,8 +56,7 @@ pipeline {
     }
 
     stage('infra sign-off') {
-      steps {
-        parallel(
+        parallel{
           stage('infra tests'){
             agent { label 'tf' }
             steps {
@@ -73,8 +72,7 @@ pipeline {
               echo 'todo - generate report'
             }
           }
-        )
-      }
+        }
     }
 
     stage('provisioning - apply'){
@@ -85,8 +83,7 @@ pipeline {
     }
 
     stage('provisioning sign-off') {
-      steps {
-        parallel(
+        parallel{
           stage('provisioning tests'){
             agent { label 'tf' }
             steps {
@@ -100,8 +97,7 @@ pipeline {
               echo 'todo - generate report'
             }
           }
-        )
-      }
+        }
     }
 
   }
