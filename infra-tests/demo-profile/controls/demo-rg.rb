@@ -4,7 +4,7 @@ control 'Subscription Tests' do
   title 'Demo Resource Groups'
 
   describe azure_generic_resource(group_name: 'demo-rg') do
-     its('total') { should eq 6 }
+     its('total') { should eq 7 }
      its('Microsoft.Compute/virtualMachines') { should eq 1 }
      its('Microsoft.Network/networkInterfaces') { should eq 1 }
      its('Microsoft.Network/publicIPAddresses') { should eq 1 }
