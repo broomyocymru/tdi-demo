@@ -11,7 +11,7 @@ pipeline {
       }
     }
 
-    stage('validate & plan infra') {
+    stage('infra - validate & plan') {
       agent { label 'tf'}
       steps {
           withCredentials([file(credentialsId:'terraform-secrets', variable: 'secrets')]){
@@ -40,7 +40,7 @@ pipeline {
       }
     }
 
-    stage('apply infra'){
+    stage('infra apply'){
       agent { label 'tf' }
       when {
         expression { readFile('status').trim().contains("2")}
@@ -54,29 +54,54 @@ pipeline {
       }
     }
 
-    stage('test infra'){
-      agent { label 'tf' }
+    stage('infra sign-off') {
       steps {
-        withCredentials([file(credentialsId:'inspec-secrets', variable: 'secrets')]){
-          sh 'AZURE_CREDS_FILE=$secrets inspec exec tests/demo-profile'
-        }
+        parallel(
+          stage('infra tests'){
+            agent { label 'tf' }
+            steps {
+              withCredentials([file(credentialsId:'inspec-secrets', variable: 'secrets')]){
+                sh 'AZURE_CREDS_FILE=$secrets inspec exec tests/demo-profile'
+              }
+            }
+          }
+
+          stage('infra report'){
+            agent { label 'tf' }
+            steps {
+              echo 'todo - generate report'
+            }
+          }
+        )
       }
     }
 
-/* Removed docker as its failing!
-    stage('test infra'){
-      agent {
-          docker {
-            image 'chef/inspec:latest'
-          }
-      }
-      steps {
-        withCredentials([file(credentialsId:'inspec-secrets', variable: 'secrets')]){
-          sh 'AZURE_CREDS_FILE=$secrets inspec exec tests/demo-profile'
-        }
+    stage('provisioning - apply'){
+      agent { label 'tf'}
+      steps{
+          echo 'todo - install software'
       }
     }
-*/
+
+    stage('provisioning sign-off') {
+      steps {
+        parallel(
+          stage('provisioning tests'){
+            agent { label 'tf' }
+            steps {
+              echo 'todo - provision software'
+            }
+          }
+
+          stage('provisioning report'){
+            agent { label 'tf' }
+            steps {
+              echo 'todo - generate report'
+            }
+          }
+        )
+      }
+    }
 
   }
 }
