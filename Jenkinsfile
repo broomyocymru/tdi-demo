@@ -15,12 +15,12 @@ pipeline {
       agent { label 'tf'}
       steps {
           withCredentials([file(credentialsId:'terraform-secrets', variable: 'secrets')]){
-            sh 'terraform init -upgrade=true infrastructure'
-            sh 'terraform get -update infrastructure'
-            sh 'terraform validate -var-file=$secrets infrastructure'
+            sh 'terraform init -upgrade=true infra'
+            sh 'terraform get -update infra'
+            sh 'terraform validate -var-file=$secrets infra'
             sh '''
               set +e
-              terraform plan -detailed-exitcode -out="plan.out" -var-file="$secrets" infrastructure
+              terraform plan -detailed-exitcode -out="plan.out" -var-file="$secrets" infra
               status=$?
               set -e
 
@@ -61,7 +61,7 @@ pipeline {
             agent { label 'tf' }
             steps {
               withCredentials([file(credentialsId:'inspec-secrets', variable: 'secrets')]){
-                sh 'AZURE_CREDS_FILE=$secrets inspec exec tests/demo-profile'
+                sh 'AZURE_CREDS_FILE=$secrets inspec exec infra-tests/demo-profile'
               }
             }
           }
