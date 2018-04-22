@@ -34,8 +34,16 @@ resource "azurerm_virtual_machine" "vm" {
     provision_vm_agent = "true"
 
     winrm {
-      protocol        = "https"
+      protocol = "https"
       certificate_url = "${azurerm_key_vault_certificate.vm-cert.secret_id}"
+    }
+  }
+
+  os_profile_secrets {
+    source_vault_id = "${var.vault_id}"
+    vault_certificates {
+      certificate_url = "${azurerm_key_vault_certificate.vm-cert.secret_id}"
+      certificate_store = "My"
     }
   }
 
