@@ -8,6 +8,7 @@ pipeline {
           sh 'git --version'
           sh 'terraform --version'
           sh 'inspec --version'
+          sh 'pwsh --version'
       }
     }
 
