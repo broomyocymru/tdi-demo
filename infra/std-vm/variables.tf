@@ -5,6 +5,7 @@ variable "resource_group_name" {}
 variable "subnet_id" {}
 variable "username" {}
 variable "password" {}
+variable "vault_uri" {}
 variable "disk_type" { default = "Standard_LRS"}
 variable "vm_size" { default = "Standard_D2_v2"}
 variable "vm_version" { default = "latest"}

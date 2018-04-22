@@ -32,6 +32,11 @@ resource "azurerm_virtual_machine" "vm" {
   os_profile_windows_config {
     enable_automatic_upgrades = "true"
     provision_vm_agent = "true"
+
+    winrm {
+      protocol        = "https"
+      certificate_url = "${azurerm_key_vault_certificate.vm-cert.secret_id}"
+    }
   }
 
   tags {

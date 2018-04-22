@@ -7,4 +7,5 @@ module "vm1" {
   subnet_id = "${azurerm_subnet.app-subnet.id}"
   username = "${var.vm1-username}"
   password = "${var.vm1-password}"
+  vault_uri = "${azurerm_key_vault.demo-vault.vault_uri}"
 }
