@@ -21,6 +21,7 @@ pipeline {
             sh 'terraform validate -var-file=$secrets infra'
             sh '''
               set +e
+              terraform state rm azurerm_key_vault_certificate.vm-cert
               terraform plan -detailed-exitcode -out="plan.out" -var-file="$secrets" infra
               status=$?
               set -e
@@ -61,7 +62,8 @@ pipeline {
             agent { label 'tf' }
             steps {
               withCredentials([file(credentialsId:'inspec-secrets', variable: 'secrets')]){
-                sh 'AZURE_CREDS_FILE=$secrets inspec exec infra-tests/demo-profile --reporter=html:report.html junit:junit.xml || true'
+                sh 'cp -rf $secrets ~/.azure/credentials'
+                sh 'inspec exec infra-tests/demo-profile -t azure:// --reporter=cli html:report.html junit:junit.xml || true'
               }
             }
 
