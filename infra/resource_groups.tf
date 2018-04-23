@@ -7,14 +7,3 @@ resource "azurerm_resource_group" "demo-rg" {
     env = "${var.tag-env}"
   }
 }
-
-/*
-resource "azurerm_resource_group" "euro-rg" {
-  name = "euro-rg"
-  location = "North Europe"
-
-  tags {
-    env = "${var.tag-env}"
-  }
-}
-*/
