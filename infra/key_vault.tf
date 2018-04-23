@@ -1,12 +1,7 @@
 data "azurerm_client_config" "current" {}
 
-resource "random_string" "vault_uid" {
-  length = 16
-  special = false
-}
-
 resource "azurerm_key_vault" "demo-vault" {
-  name = "vault${random_string.vault_uid.result}"
+  name = "vault2qgaqzvmsrc9wbe0"
   location = "${var.location}"
   resource_group_name = "${azurerm_resource_group.demo-rg.name}"
   tenant_id = "${data.azurerm_client_config.current.tenant_id}"

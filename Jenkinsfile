@@ -21,7 +21,7 @@ pipeline {
             sh 'terraform validate -var-file=$secrets infra'
             sh '''
               set +e
-              terraform state rm azurerm_key_vault_certificate.vm-cert
+              
               terraform plan -detailed-exitcode -out="plan.out" -var-file="$secrets" infra
               status=$?
               set -e
