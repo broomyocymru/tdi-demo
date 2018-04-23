@@ -48,6 +48,7 @@ resource "azurerm_virtual_machine" "vm" {
 
   tags {
     env = "${var.tag-env}"
+    role = "demo-desktop"
     remote_user = "${var.username}"
     remote_ip = "${azurerm_public_ip.public_ip.ip_address}"
     remote_connection = "winrm"
