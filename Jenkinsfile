@@ -9,6 +9,7 @@ pipeline {
           sh 'terraform --version'
           sh 'inspec --version'
           sh 'pwsh --version'
+          sh 'ansible --version'
       }
     }
 
@@ -21,7 +22,7 @@ pipeline {
             sh 'terraform validate -var-file=$secrets infra'
             sh '''
               set +e
-              
+
               terraform plan -detailed-exitcode -out="plan.out" -var-file="$secrets" infra
               status=$?
               set -e
@@ -87,7 +88,8 @@ pipeline {
     stage('provisioning - apply'){
       agent { label 'tf'}
       steps{
-          echo 'todo - install software'
+          echo 'ansible -i inventory.py -m win_ping winrm.*'
+          echo 'ansible-playbook site.yml -i inventory.py'
       }
     }
 
