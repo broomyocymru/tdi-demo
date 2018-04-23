@@ -88,8 +88,10 @@ pipeline {
     stage('provisioning - apply'){
       agent { label 'tf'}
       steps{
-          echo 'ansible -i inventory.py -m win_ping winrm.*'
-          echo 'ansible-playbook site.yml -i inventory.py'
+          dir("platform") {
+              sh 'ansible -i inventory.py -m win_ping winrm.*'
+              echo 'ansible-playbook site.yml -i inventory.py'
+          }
       }
     }
 
