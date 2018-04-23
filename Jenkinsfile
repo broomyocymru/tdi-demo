@@ -62,7 +62,7 @@ pipeline {
             agent { label 'tf' }
             steps {
               withCredentials([file(credentialsId:'inspec-secrets', variable: 'secrets')]){
-                sh 'cp -rf $secrets ~/.azure/credentials'
+                sh ' mkdir -p ~/.azure && cp -rf $secrets ~/.azure/credentials'
                 sh 'inspec exec infra-tests/demo-profile -t azure:// --reporter=cli html:report.html junit:junit.xml || true'
               }
             }
