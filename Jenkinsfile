@@ -90,7 +90,7 @@ pipeline {
       steps{
           dir("platform") {
               sh 'ansible -i inventory.py -m win_ping winrm.*'
-              echo 'ansible-playbook site.yml -i inventory.py'
+              sh 'ansible-playbook site.yml -i inventory.py'
           }
       }
     }

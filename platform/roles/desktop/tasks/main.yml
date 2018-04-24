@@ -5,10 +5,10 @@
     name: git
     state: present
 
-- name: Install notepadplusplus version 6.6
+- name: Install notepadplusplus version 7.5.6
   win_chocolatey:
     name: notepadplusplus.install
-    version: 'latest'
+    version: '7.5.6'
 
 - name: Upgrade installed packages
   win_chocolatey:
