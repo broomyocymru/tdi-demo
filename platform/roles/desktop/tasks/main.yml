@@ -10,6 +10,11 @@
     name: notepadplusplus.install
     version: '7.5.6'
 
+- name: Install VSCode version 1.22.2
+  win_chocolatey:
+    name: notepadplusplus.install
+    version: '1.22.2'
+
 - name: Upgrade installed packages
   win_chocolatey:
     name: all
