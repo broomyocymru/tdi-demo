@@ -1,4 +1,5 @@
-- hosts: demo-01-vm
-  tasks:
-  - include_role:
-       name: desktop
+---
+- name: Setup Demo-01-VM  
+  hosts: demo-01-vm
+  roles:
+    - { role: desktop }
