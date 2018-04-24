@@ -1,0 +1,4 @@
+- hosts: demo-01-vm
+  tasks:
+  - include_role:
+       name: desktop

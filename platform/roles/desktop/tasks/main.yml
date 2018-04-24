@@ -1,0 +1,16 @@
+---
+# tasks file for desktop
+- name: Install git
+  win_chocolatey:
+    name: git
+    state: present
+
+- name: Install notepadplusplus version 6.6
+  win_chocolatey:
+    name: notepadplusplus.install
+    version: 'latest'
+
+- name: Upgrade installed packages
+  win_chocolatey:
+    name: all
+    state: latest
